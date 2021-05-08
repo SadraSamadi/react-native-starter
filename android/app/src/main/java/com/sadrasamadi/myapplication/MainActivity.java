@@ -1,14 +1,15 @@
 package com.sadrasamadi.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 
-import android.os.Bundle;
+import com.facebook.react.ReactActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ReactActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+  @Nullable
+  @Override
+  protected String getMainComponentName() {
+    return "MyApplication";
+  }
+
 }

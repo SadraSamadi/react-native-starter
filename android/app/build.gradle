@@ -4,7 +4,9 @@ project.ext.react = [
   enableHermes: true
 ]
 
+apply from: "../../node_modules/react-native-unimodules/gradle.groovy"
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/expo-constants/scripts/get-app-config-android.gradle"
 
 def enableProguardInReleaseBuilds = true
 
@@ -49,6 +51,7 @@ android {
 dependencies {
   // noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
+  addUnimodulesDependencies()
   if (enableHermes) {
     def hermesPath = "../../node_modules/hermes-engine/android/"
     debugImplementation files(hermesPath + "hermes-debug.aar")

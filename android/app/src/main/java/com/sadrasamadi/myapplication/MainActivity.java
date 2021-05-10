@@ -9,7 +9,7 @@ public class MainActivity extends ReactActivity {
   @Nullable
   @Override
   protected String getMainComponentName() {
-    return "MyApplication";
+    return "main";
   }
 
 }

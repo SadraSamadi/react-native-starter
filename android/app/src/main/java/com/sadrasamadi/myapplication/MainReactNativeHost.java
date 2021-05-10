@@ -15,13 +15,13 @@ public class MainReactNativeHost extends ReactNativeHost {
   }
 
   @Override
-  protected String getJSMainModuleName() {
-    return "index";
+  public boolean getUseDeveloperSupport() {
+    return BuildConfig.DEBUG;
   }
 
   @Override
-  public boolean getUseDeveloperSupport() {
-    return BuildConfig.DEBUG;
+  protected String getJSMainModuleName() {
+    return "index";
   }
 
   @Override

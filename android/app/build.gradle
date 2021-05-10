@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-  //noinspection GradleDynamicVersion
+  // noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   addUnimodulesDependencies()
   if (enableHermes) {

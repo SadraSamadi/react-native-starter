@@ -6,12 +6,13 @@ project.ext.react = [
 
 apply from: "../../node_modules/react-native-unimodules/gradle.groovy"
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/expo-constants/scripts/get-app-config-android.gradle"
 
 def enableProguardInReleaseBuilds = true
 
 def jscFlavor = "org.webkit:android-jsc:+"
 
-def enableHermes = project.ext.react.get("enableHermes", false);
+def enableHermes = project.ext.react.get("enableHermes", false)
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion

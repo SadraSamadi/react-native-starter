@@ -1,9 +1,13 @@
 package com.sadrasamadi.myapplication;
 
 import android.app.Application;
+import android.content.res.Configuration;
+
+import androidx.annotation.NonNull;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JSIModulePackage;
@@ -54,6 +58,14 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, false);
+  }
+
+  @Override
+  public void onConfigurationChanged(@NonNull Configuration config) {
+    super.onConfigurationChanged(config);
+    ReactNativeHost host = getReactNativeHost();
+    ReactInstanceManager manager = host.getReactInstanceManager();
+    manager.onConfigurationChanged(this, config);
   }
 
   @Override

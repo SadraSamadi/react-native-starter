@@ -1,6 +1,7 @@
 package com.sadrasamadi.myapplication;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import org.unimodules.adapters.react.ModuleRegistryAdapter;
 import org.unimodules.adapters.react.ReactModuleRegistryProvider;
 import org.unimodules.core.interfaces.Package;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -58,6 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, false);
+    initFlipper();
   }
 
   @Override
@@ -71,6 +74,19 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
+  }
+
+  private void initFlipper() {
+    if (!BuildConfig.DEBUG)
+      return;
+    try {
+      ReactInstanceManager manager = mReactNativeHost.getReactInstanceManager();
+      Class<?> clazz = Class.forName("com.sadrasamadi.myapplication.ReactNativeFlipper");
+      Method method = clazz.getMethod("init", Context.class, ReactInstanceManager.class);
+      method.invoke(null, this, manager);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   private ReactModuleRegistryProvider getModuleRegistryProvider() {

@@ -51,6 +51,12 @@ android {
 dependencies {
   // noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
+  debugImplementation("com.facebook.flipper:flipper:0.87.0") {
+    exclude group:"com.facebook.fbjni"
+  }
+  debugImplementation("com.facebook.flipper:flipper-network-plugin:0.87.0") {
+    exclude group:"com.facebook.flipper"
+  }
   addUnimodulesDependencies()
   if (enableHermes) {
     def hermesPath = "../../node_modules/hermes-engine/android/"

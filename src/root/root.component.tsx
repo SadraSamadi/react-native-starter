@@ -1,30 +1,24 @@
-import {EnhancedStore} from '@reduxjs/toolkit';
 import React, {FC, useEffect, useState} from 'react';
 import {Provider as ReduxProvider} from 'react-redux';
 import {AppComponent} from './app/app.component';
 import {createRootStore} from './root.api';
-import {RootState} from './root.model';
+import {RootStore} from './root.model';
 
 export const RootComponent: FC = () => {
 
-  const [rootStore, setRootStore] = useState<EnhancedStore<RootState>>();
+  const [store, setStore] = useState<RootStore>();
 
   useEffect(() => {
-    (async () => {
-      try {
-        let store = await createRootStore();
-        setRootStore(store);
-      } catch (err) {
-        console.warn(err);
-      }
-    })();
+    createRootStore()
+      .then(setStore)
+      .catch(console.warn);
   }, []);
 
-  if (!rootStore)
+  if (!store)
     return null;
 
   return (
-    <ReduxProvider store={rootStore}>
+    <ReduxProvider store={store}>
       <AppComponent/>
     </ReduxProvider>
   );

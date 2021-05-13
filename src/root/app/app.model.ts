@@ -1,6 +1,8 @@
+import {AsyncStatus} from '../../core/core.model';
+
 export interface AppState {
 
-  ready: boolean;
+  init: AsyncStatus;
 
 }
 

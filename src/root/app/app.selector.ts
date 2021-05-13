@@ -1,3 +1,3 @@
-import {RootState} from '../root.model';
+import {rootSelector} from '../root.util';
 
-export const selectApp = (state: RootState) => state.app;
+export const selectApp = rootSelector(state => state.app)();

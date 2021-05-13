@@ -1,12 +1,12 @@
-import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import _ from 'lodash';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import {RootState} from './root.model';
+import {RootStore} from './root.model';
 import {rootReducer} from './root.reducer';
 import {rootSaga} from './root.saga';
 
-export async function createRootStore(): Promise<EnhancedStore<RootState>> {
+export async function createRootStore(): Promise<RootStore> {
   let sagaMiddleware = createSagaMiddleware();
   let store = configureStore({
     reducer: rootReducer,

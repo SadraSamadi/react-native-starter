@@ -1,9 +1,8 @@
-import {PayloadAction} from '@reduxjs/toolkit';
-import {Platform, ToastAndroid} from 'react-native';
 import {SagaIterator} from 'redux-saga';
 import {call, put, takeEvery, takeLeading} from 'redux-saga/effects';
+import {FailureAction} from '../../core/core.model';
 import {appError, appInitFailure, appInitRequest, appInitSuccess} from './app.action';
-import {init} from './app.api';
+import {init, toast} from './app.api';
 
 export function* appSaga(): SagaIterator {
   yield takeLeading(appInitRequest, handleAppInitRequest);
@@ -15,12 +14,11 @@ function* handleAppInitRequest(): SagaIterator {
     yield call(init);
     yield put(appInitSuccess());
   } catch (err) {
-    yield put(appInitFailure());
-    yield put(appError(err.message));
+    yield put(appInitFailure(err));
+    yield put(appError(err));
   }
 }
 
-function* handleAppError(action: PayloadAction<string>): SagaIterator {
-  if (Platform.OS === 'android')
-    yield call([ToastAndroid, ToastAndroid.show], action.payload, ToastAndroid.SHORT);
+function* handleAppError(action: FailureAction): SagaIterator {
+  yield call(toast, action.error);
 }
